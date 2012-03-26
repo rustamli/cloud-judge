@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>RN Academy - Problems</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/commons/twitter/bootstrap/css/bootstrap.blue.min.css" rel="stylesheet">
+    <link href="/commons/twitter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/views/admin/css/style.css" rel="stylesheet">
+
+      <style>
+          .problem-id {
+              font-size: 20px;
+              font-family: 'Consolas', sans-serif;
+              margin: 5px;
+              display: block;
+          }
+
+          .problem-stats {
+              width: 80px;
+          }
+
+          .problem-stats span {
+              padding: 5px;
+              display: block;
+          }
+      </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+#parse("/views/admin/_header.html")
+
+    <div class="container">
+
+      <h1>Problems</h1>
+#if ($p.get("done")[0] == "true")
+        <div class="alert alert-success">
+            <a class="close" data-dismiss="alert">×</a>
+            Import successfully requested.
+        </div>
+#end
+
+      <div class="container">
+          <div class="subnav">
+              <ul class="nav nav-pills">
+                <li><a class="modal-trigger" href="#upload-problems-modal">+ Upload</a></li>
+                <li><a href="#">Recalculate Rates</a></li>
+              </ul>
+          </div>
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                    <th class="id-column">#</th>
+                    <th>Title</th>
+                    <th class="rate-column">Rate</th>
+                    <th style="width: 80px"></th>
+                    <th class="submits-column"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td><strong class="problem-id">2010</strong></td>
+                    <td><a class="cj-icon cj-icon-folder" href="/problem/$item.get("id")">A + B problem</a></td>
+                    <td class="problem-stats"><span>63% of 211</span></td>
+                    <td><a class="btn btn-small btn-primary" href="#">&darr; Download</a></td>
+                    <td><a class="btn btn-small btn-danger" href="#">&times; Delete</a></td>
+                </tr>
+              </tbody>
+
+          </table>
+      </div>
+    </div>
+
+    <div class="modal fade" id="upload-problems-modal">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+
+            <h3>Upload Problems</h3>
+        </div>
+        <form action="/problems/import-problems" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label" for="files">Upload problems in ZIP files:</label>
+                    <input id="files" name="files" type="file" multiple="multiple">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-dropdown.js"></script>
+
+    <script src="/views/website/js/ff.js"></script>
+    <script>$(function() { FF.init('problems') });</script>
+
+  </body>
+</html>

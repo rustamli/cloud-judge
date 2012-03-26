@@ -1,0 +1,22 @@
+body {
+    padding-top: 60px;
+}
+
+h1, h2, h3 {
+    margin-bottom: 15px;
+}
+
+.table .id-column, .table .submits-column, .table .rate-column {
+    width: 60px;
+}
+
+.cj-icon {
+    background-repeat: no-repeat;
+    background-position: 5px;
+    padding: 5px 55px 5px 35px;
+    display: block;
+}
+
+.cj-icon-folder {
+    background-image: url(/commons/icons/blue-folder-horizontal.png);
+}

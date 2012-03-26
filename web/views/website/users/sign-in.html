@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>RN Academy - Sign In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/commons/twitter/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/commons/twitter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/views/website/css/style.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+#parse("/views/website/_header.html")
+
+    <div class="container">
+
+      <h1>Sign In</h1>
+      <div class="container">
+        <form method="POST" class="form-horizontal form-page" action="/sign-in">
+            <fieldset>
+                <legend>
+                    Use your email and password to sign in<br>
+                    If you don't have an account please <a href="/sign-up">sign up</a> first
+                </legend>
+
+#if ($validationResult)
+                <br>
+                <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">&times;</a>
+                    <h4 class="alert-heading">Error</h4>
+#foreach ($validationMsg in $validationResult)
+                    <p>$lang.get($validationMsg)</p>
+#end
+                </div>
+#end
+
+                <div class="control-group">
+                  <label class="control-label" for="email">Email:</label>
+                  <div class="controls">
+                    <input type="text" class="input" id="email" name="email">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="password">Password:</label>
+                  <div class="controls">
+                    <input type="password" class="input" id="password" name="password">
+                  </div>
+                </div>
+            </fieldset>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-large btn-primary">Sign In</button>
+                <a style="margin-left: 15px;" href="/">back to the home page</a>
+            </div>
+            
+            <input type="hidden" name="from" id="from" value="$from">
+        </form>
+      </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-dropdown.js"></script>
+
+    <script src="/views/website/js/ff.js"></script>
+    <script>$(function() { FF.init('sign-up') });</script>
+
+  </body>
+</html>

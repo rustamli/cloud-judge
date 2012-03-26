@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+#set($problem = $d.get("problem"))
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>RN Academy - $profileAccount.name</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/commons/twitter/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/commons/twitter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/views/website/css/style.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+#parse("/views/website/_header.html")
+
+    <div class="container">
+
+      <h1>$profileAccount.name <span style="color: #999">($profileAccount.country)</span> #if($account.id == $profileAccount.id)<small> <a href="/edit-profile">Edit your profile</a></small>#end</h1>
+
+      <div class="row">
+          <div class="span8">
+              <div class="problem-text">$profileAccount.about</div>
+
+              <div class="page-header">
+                <h4>Solved problems</h4>
+              </div>
+              <div class="container">
+                  <a class="btn btn-success" href="/problem?id=45">1002</a>
+                  <a class="btn btn-success" href="/problem?id=45">1003</a>
+                  <a class="btn btn-success" href="/problem?id=45">1012</a>
+              </div>
+
+              <div class="page-header">
+                <h4>Unsolved problems</h4>
+              </div>
+              <div class="container">
+                <a class="btn" href="/problem?id=45">1001</a>
+                <a class="btn" href="/problem?id=45">1105</a>
+                <a class="btn" href="/problem?id=45">1202</a>
+              </div>
+
+
+
+          </div>
+
+          <div class="span4">
+              <h3>Staticstics</h3>
+              <table class="table">
+                  <tbody>
+                    <tr>
+                        <td><i class="icon-star"></i> Ranking</td>
+                        <td><strong>#11</strong></td>
+                    </tr>
+                    <tr>
+                        <td><i class="icon-flag"></i> Solved problems</td>
+                        <td><span class="label label-success">211</span></td>
+                    </tr>
+                    <tr>
+                        <td><i class="icon-signal"></i> Success rate</td>
+                        <td>68%</td>
+                    </tr>
+                  </tbody>
+              </table>
+              <h3>Results</h3>
+                <table class="table">
+                    <tbody>
+                      <tr>
+                          <td><i class="icon-ok"></i> Accepted</td>
+                          <td><span class="label label-success">321</span></td>
+                      </tr>
+                      <tr>
+                          <td><i class="icon-remove"></i> Wrong Answer</td>
+                          <td>13</td>
+                      </tr>
+                      <tr>
+                          <td><i class="icon-remove-sign"></i> Compilation Error</td>
+                          <td>12</td>
+                      </tr>
+                      <tr>
+                          <td><i class="icon-time"></i> Time limit</td>
+                          <td>102</td>
+                      </tr>
+                      <tr>
+                          <td><i class="icon-align-left"></i> Memory limit</td>
+                          <td>0</td>
+                      </tr>
+                      <tr>
+                          <td><i class="icon-print"></i> Output limit</td>
+                          <td>0</td>
+                      </tr>
+                    </tbody>
+                </table>
+
+              <div class="modal fade" id="submit-modal">
+                    <div class="modal-header">
+                      <a class="close" data-dismiss="modal">&times;</a>
+                      <h3>Submit a solution</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                              <div class="control-group">
+                                <label class="control-label" for="source">Source code:</label>
+                                <div class="controls">
+                                  <textarea class="input-xlarge" id="source" rows="3" style="width: 98%; height: 184px;"></textarea>
+                                </div>
+                              </div>
+                            <hr>
+                            <div class="control-group">
+                                <label class="control-label" for="language">Language</label>
+                                <div class="controls">
+                                  <select id="language">
+                                    <option>C</option>
+                                    <option>C++</option>
+                                    <option>Java</option>
+                                    <option>Pascal</option>
+                                    <option>Python</option>
+                                  </select>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#" class="btn btn-primary">Submit</a>
+                      <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+                    </div>
+              </div>
+
+          </div>
+
+      </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-transition.js"></script>
+
+    <script src="/views/website/js/ff.js"></script>
+    <script>$(function() { FF.init('problems') });</script>
+
+  </body>
+</html>

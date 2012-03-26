@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+    <servlet>
+   		<servlet-name>ImportProblemTask</servlet-name>
+   		<servlet-class>openoli.cj.controllers.problems.ImportProblemTask</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>ImportProblemTask</servlet-name>
+   		<url-pattern>/import-problem-task</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>ImportProblemsController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.problems.ImportProblemsController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>ImportProblemsController</servlet-name>
+   		<url-pattern>/problems/import-problems</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>SignOutController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.users.SignOutController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>SignOutController</servlet-name>
+   		<url-pattern>/sign-out</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>SignInController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.users.SignInController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>SignInController</servlet-name>
+   		<url-pattern>/sign-in</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>EditProfileController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.users.EditProfileController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>EditProfileController</servlet-name>
+   		<url-pattern>/edit-profile</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>ProfileController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.users.ProfileController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>ProfileController</servlet-name>
+   		<url-pattern>/profile</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>VerifyAccountController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.users.VerifyAccountController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>VerifyAccountController</servlet-name>
+   		<url-pattern>/verify-account</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>SignUpController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.users.SignUpController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>SignUpController</servlet-name>
+   		<url-pattern>/sign-up</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>SetLangController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.general.SetLangController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>SetLangController</servlet-name>
+   		<url-pattern>/set-lang</url-pattern>
+   	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PagesController</servlet-name>
+		<servlet-class>openoli.cj.controllers.general.PagesController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PagesController</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>

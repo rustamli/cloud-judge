@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+#set($problem = $d.get("problem"))
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>RN Academy - $problem.get("title")</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/commons/twitter/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/commons/twitter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/views/website/css/style.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+#parse("/views/website/_header.html")
+
+    <div class="container">
+
+      <h1>$problem.get("title") <small>#$problem.get("id")</small></h1>
+      <div class="row">
+          <div class="span8">
+<div class="problem-text">$problem.get("text")</div>
+          </div>
+
+          <div class="span4">
+              <h3>Staticstics</h3>
+              <table class="table">
+                  <tbody>
+                    <tr>
+                        <td><i class="icon-signal"></i> Success rate</td>
+                        <td>68%</td>
+                    </tr>
+                    <tr>
+                        <td><i class="icon-flag"></i> Submits count</td>
+                        <td>211</td>
+                    </tr>
+                  </tbody>
+              </table>
+              <h3>Limitations</h3>
+                <table class="table">
+                    <tbody>
+                      <tr>
+                          <td><i class="icon-time"></i> Time limit</td>
+                          <td>$problem.get("tl") sec</td>
+                      </tr>
+                      <tr>
+                          <td><i class="icon-align-left"></i> Memory limit</td>
+                          <td>${problem.get("ml")} MB</td>
+                      </tr>
+                      <tr>
+                          <td><i class="icon-print"></i> Output limit</td>
+                          <td>${problem.get("ol")} KB</td>
+                      </tr>
+                    </tbody>
+                </table>
+              <h3>Check your solution</h3>
+              <div>
+                <a href="#submit-modal" class="btn btn-primary modal-trigger">Submit a solution</a>
+              </div>
+
+              <div class="modal fade" id="submit-modal">
+                    <div class="modal-header">
+                      <a class="close" data-dismiss="modal">&times;</a>
+                      <h3>Submit a solution</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                              <div class="control-group">
+                                <label class="control-label" for="source">Source code:</label>
+                                <div class="controls">
+                                  <textarea class="input-xlarge" id="source" rows="3" style="width: 98%; height: 184px;"></textarea>
+                                </div>
+                              </div>
+                            <hr>
+                            <div class="control-group">
+                                <label class="control-label" for="language">Language</label>
+                                <div class="controls">
+                                  <select id="language">
+                                    <option>C</option>
+                                    <option>C++</option>
+                                    <option>Java</option>
+                                    <option>Pascal</option>
+                                    <option>Python</option>
+                                  </select>
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <a href="#" class="btn btn-primary">Submit</a>
+                      <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+                    </div>
+              </div>
+
+          </div>
+
+      </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="/commons/twitter/bootstrap/js/bootstrap-transition.js"></script>
+
+    <script src="/views/website/js/ff.js"></script>
+    <script>$(function() { FF.init('problems') });</script>
+
+  </body>
+</html>
