@@ -1,0 +1,9 @@
+{
+    "no": 1002,
+
+    "time_limit": 2,
+    "memory_limit": 64,
+    "output_limit": 4,
+
+    "checker_type": "DEFAULT"
+}
