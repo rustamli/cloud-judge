@@ -58,4 +58,8 @@ public class Translation implements IRecord {
     public Key<Translation> getKey() {
         return new Key<Translation>(Translation.class, id);
     }
+
+    public static Translation getByKey(Key<Translation> translationKey) {
+        return DAO.getOfy().get(translationKey);
+    }
 }

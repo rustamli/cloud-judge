@@ -4,7 +4,7 @@ import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Segment;
 import net.htmlparser.jericho.Source;
-import osw.ff.velocity.VelocityMaster;
+import openoli.cj.velocity.VelocityMaster;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -156,4 +156,32 @@ public class Problem implements IRecord {
             this.translations.add(translation.getKey());
         }
     }
+
+    public static List<Problem> list() {
+        return DAO.getOfy().query(Problem.class).list();
+    }
+    
+    public String getTitle(String langCode) {
+        Translation requiredTranslation = null;
+        Translation englishTranslation = null;
+        for (Key<Translation> translationKey : translations) {
+            Translation translation = Translation.getByKey(translationKey);
+            if (translation.getLang().toString().equals(langCode)) {
+                requiredTranslation = translation;
+                break;
+            }
+            else if (translation.getLang() == ELangType.ENGLISH) {
+                englishTranslation = translation;
+            }
+        }
+
+        if ((requiredTranslation == null) && (englishTranslation != null))
+            requiredTranslation = englishTranslation;
+        else {
+            requiredTranslation = new Translation();
+            requiredTranslation.setTitle(String.format("#%d", id));
+        }
+
+        return requiredTranslation.getTitle();
+    }
 }

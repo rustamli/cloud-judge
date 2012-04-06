@@ -4,6 +4,7 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
     <servlet>
    		<servlet-name>ImportProblemTask</servlet-name>
    		<servlet-class>openoli.cj.controllers.problems.ImportProblemTask</servlet-class>
@@ -20,6 +21,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
    	<servlet-mapping>
    		<servlet-name>ImportProblemsController</servlet-name>
    		<url-pattern>/problems/import-problems</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>ProblemListController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.problems.ProblemListController</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>ProblemListController</servlet-name>
+   		<url-pattern>/problems</url-pattern>
    	</servlet-mapping>
 
     <servlet>

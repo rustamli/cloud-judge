@@ -37,10 +37,10 @@
                 </tr>
               </thead>
               <tbody>
-#foreach ($item in $d.get("problems").get("items"))
+#foreach ($problem in $problems)
                 <tr>
-                    <td>$item.get("id")</td>
-                    <td><a href="/problem/$item.get("id")">$item.get("title")</a></td>
+                    <td>$problem.getId()</td>
+                    <td><a href="/problem/$item.get("id")">$problem.getTitle("$langCode")</a></td>
                     <td>63%</td>
                     <td>211</td>
                 </tr>
