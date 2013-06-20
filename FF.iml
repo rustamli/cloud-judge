@@ -12,13 +12,11 @@
       </configuration>
       <facet type="google-app-engine" name="Google App Engine">
         <configuration>
-          <password>df9bdf9bdfc4dfc5dfcedfc4dfc5dfc6</password>
+          <sdk-home-path>$GAE_JAVA$</sdk-home-path>
+          <run-enhancer-on-make>true</run-enhancer-on-make>
           <files-to-enhance>
             <file path="$MODULE_DIR$/src" />
           </files-to-enhance>
-          <run-enhancer-on-make>true</run-enhancer-on-make>
-          <sdk-home-path>C:/tools/appengine-java-sdk</sdk-home-path>
-          <email>mc2run@gmail.com</email>
         </configuration>
       </facet>
     </facet>
@@ -32,6 +30,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="FF-deps" level="project" />
     <orderEntry type="library" name="GAE" level="project" />
+    <orderEntry type="library" name="jsoup-1.6.2" level="project" />
   </component>
 </module>
 

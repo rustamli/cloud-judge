@@ -12,6 +12,9 @@
   visibility: hidden;
 }
 @media (max-width: 480px) {
+  body {
+      padding-top: 0 !important;
+  }
   .nav-collapse {
     -webkit-transform: translate3d(0, 0, 0);
   }

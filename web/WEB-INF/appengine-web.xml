@@ -3,4 +3,5 @@
   <application>fantasyfringe</application>
   <version>i3</version>
   <sessions-enabled>true</sessions-enabled>
+  <threadsafe>true</threadsafe>
 </appengine-web-app>

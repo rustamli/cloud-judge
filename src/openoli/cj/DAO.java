@@ -14,9 +14,7 @@ public class DAO extends DAOBase {
         ObjectifyService.register(Account.class);
         ObjectifyService.register(ProblemFile.class);
         ObjectifyService.register(Problem.class);
-        ObjectifyService.register(Test.class);
-        ObjectifyService.register(Translation.class);
-        ObjectifyService.register(Tag.class);
+        ObjectifyService.register(Submit.class);
     }
 
 

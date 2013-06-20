@@ -3,14 +3,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>RN Academy - Sign Up</title>
+    <title>Qeydiyyat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/commons/twitter/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/commons/twitter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href="/views/website/css/style.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -25,26 +25,21 @@
 
     <div class="container">
 
-      <h1>Sign Up</h1>
+      <h1>Qeydiyyat</h1>
       <div class="container">
 #if ($showConfirmMsg == true)
-        <h3>Confirm your account</h3>
+        <h3>Qeydiyyatınızı təsdiqləyin</h3>
 
         <div class="alert alert-success">
             <a class="close" data-dismiss="alert">&times;</a>
-            <strong>Well done!</strong><br> We've sent an email with instructions to you.
-            <br>You will find a confirmation link in it, just click it to start using your account.
-            <br>
-            <br>
-            Looking forward for your solutions!
-            <br>
-            <br>
-            <a href="/">back to the home page</a>
+            <strong>Əla!</strong><br> Qeydiyyatınızı təsdiqləmək üçün lazım olan məlumatı sizin email ünvanınıza göndərdik.
+
+            <a href="/">əsas səhifəyə geri qayıt</a>
         </div>
 #else
         <form method="POST" class="form-horizontal form-page" action="/sign-up">
             <fieldset>
-                <legend>Fill fields below and get started</legend>
+                <legend>Qeydiyyatdan keçmək üçün aşağıdaki formanı doldurun</legend>
 #if ($validationResult)
                 <br>
                 <div class="alert alert-error">
@@ -56,7 +51,7 @@
                 </div>
 #end
                 <div class="control-group">
-                  <label class="control-label" for="name">* Name:</label>
+                  <label class="control-label" for="name">* Adınız:</label>
                   <div class="controls">
                     <input type="text" class="input" id="name" name="name" value="$!name">
                   </div>
@@ -65,45 +60,43 @@
                   <label class="control-label" for="email">* Email:</label>
                   <div class="controls">
                     <input type="text" class="input" id="email" name="email" value="$!email">
-                    <p class="help-block">Your email addres won't be available for other users</p>
+                    <p class="help-block">Bu email ünvanını, qeydiyyatınızı təstiqləmək üçün istifadə edəcəksiniz</p>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="password">* Password:</label>
+                  <label class="control-label" for="password">* Şifrə:</label>
                   <div class="controls">
                     <input type="password" class="input" id="password" name="password">
-                    <p class="help-block">Minimum 6 symbols</p>
+                    <p class="help-block">Minimum 6 simvoldan ibarər olmalıdı</p>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="password2">* Password:</label>
+                  <label class="control-label" for="password2">* Şifrə:</label>
                   <div class="controls">
                     <input type="password" class="input" id="password2" name="password2">
-                    <p class="help-block">Repeat your password once more</p>
+                    <p class="help-block">Şifrəni təkrarlayın</p>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="country">Country:</label>
+                  <label class="control-label" for="country">Ölkə:</label>
                   <div class="controls">
                     <select class="input" id="country" selectedvalue="$!country" name="country">
-                        <option value="world">World Citizen</option>
-                        <option value="az">Azerbaijan</option>
-                        <option value="ru">Russia</option>
-                        <option value="en">UK</option>
+                        <option value="az">Azərbaycan</option>
+                        <option value="ru">Digər</option>
                     </select>
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="about">About:</label>
+                  <label class="control-label" for="about">Haqqınızda:</label>
                   <div class="controls">
                     <textarea class="input-xlarge" rows="6" id="about" name="about">$!about</textarea>
-                    <p class="help-block">Describe yourself briefly. These text will appear on your profile page</p>
+                    <p class="help-block">Buradakı məlumat sizin profilinizdə yerləşdiriləcək</p>
                   </div>
                 </div>
             </fieldset>
             <div class="form-actions">
-                <button type="submit" class="btn btn-large btn-primary">Sign Up</button>
-                <a style="margin-left: 15px;" href="/">back to the home page</a>
+                <button type="submit" class="btn btn-large btn-primary">Göndər</button>
+                <a style="margin-left: 15px;" href="/">əsas səhifəyə geri qayıt</a>
             </div>
         </form>
 #end

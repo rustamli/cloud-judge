@@ -1,40 +1,37 @@
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Cloud Judge</a>
+      <a class="brand" href="/">informatika.az</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li>
           <li><a class="nav-problems" href="/problems">$lang.get("$Problems")</a></li>
-          <li><a class="nav-rankings" href="/rankings">Rankings</a></li>
-          <li><a class="nav-wiki" href="/wiki">Wiki</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/credits">Credits</a></li>
+          <li><a class="nav-rankings" href="/rankings">$lang.get("$Rankings")</a></li>
+          <li><a href="/credits">Layihə Haqqında</a></li>
         </ul>
         <ul class="nav pull-right">
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">$langCode.toUpperCase()<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">$langCode.toUpperCase() <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="/set-lang?lang=az&from=$url">Azərbaycan dili</a></li>
-              <li><a href="/set-lang?lang=en&from=$url">English</a></li>
-              <li><a href="/set-lang?lang=ru&from=$url">Русский</a></li>
+              <!--li><a href="/set-lang?lang=en&from=$url">English</a></li>
+              <li><a href="/set-lang?lang=ru&from=$url">Русский</a></li-->
             </ul>
           </li>
           <li class="divider-vertical"></li>
 #if ($isSignedIn == true)
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">$account.getEmail()<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">$account.getEmail() <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="/profile?id=$account.getId()">My Profile</a></li>
-              <li><a href="/edit-profile">Edit Profile</a></li>
+              <li><a href="/profile?id=$account.getId()">Mənim Profilim</a></li>
+              <li><a href="/edit-profile">Profilini Yenilə</a></li>
               <li class="divider"></li>
-              <li><a href="/sign-out">Sign Out</a></li>
+              <li><a href="/sign-out">$lang.get("$SignOut")</a></li>
             </ul>
           </li>
 #else
-          <li><a href="/sign-up">Sign Up</a></li>
-          <li><a href="/sign-in?from=$url">Sign In</a></li>
+          <li><a href="/sign-up">$lang.get("$SignUp")</a></li>
+          <li><a href="/sign-in?from=$url">$lang.get("$SignIn")</a></li>
 #end
         </ul>
       </div><!--/.nav-collapse -->

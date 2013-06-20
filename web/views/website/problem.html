@@ -10,9 +10,10 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/commons/twitter/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/commons/twitter/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href="/views/website/css/style.css" rel="stylesheet">
+    <link href="/views/website/css/problem.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -23,83 +24,82 @@
   <body>
 
 #parse("/views/website/_header.html")
-
+#set($translation = $problem.getTranslation("$langCode"))
     <div class="container">
 
-      <h1>$problem.get("title") <small>#$problem.get("id")</small></h1>
+      <h1><i class="icon-file-text"></i> $translation.title <small>#${problem.no}/$langCode</small></h1>
       <div class="row">
           <div class="span8">
-<div class="problem-text">$problem.get("text")</div>
+<div class="problem-text">$translation.text</div>
           </div>
 
           <div class="span4">
-              <h3>Staticstics</h3>
+              <h3>Öz həllini yoxla</h3>
+              <div>
+                  <a href="#submit-modal" class="btn btn-primary modal-trigger"><i class="icon-arrow-up"></i> Həllin kodunu yüklə</a>
+              </div>
+              <br><br>
+              <h3>Statistika</h3>
               <table class="table">
                   <tbody>
                     <tr>
-                        <td><i class="icon-signal"></i> Success rate</td>
+                        <td class="flex"><i class="icon-signal"></i> Success rate</td>
                         <td>68%</td>
                     </tr>
                     <tr>
-                        <td><i class="icon-flag"></i> Submits count</td>
+                        <td class="flex"><i class="icon-flag"></i> Submits count</td>
                         <td>211</td>
                     </tr>
                   </tbody>
               </table>
-              <h3>Limitations</h3>
+              <h3>Məhdudiyyətlər</h3>
                 <table class="table">
                     <tbody>
                       <tr>
-                          <td><i class="icon-time"></i> Time limit</td>
-                          <td>$problem.get("tl") sec</td>
+                          <td class="flex"><i class="icon-time"></i> Vaxt limiti</td>
+                          <td>$problem.timeLimit sec</td>
                       </tr>
                       <tr>
-                          <td><i class="icon-align-left"></i> Memory limit</td>
-                          <td>${problem.get("ml")} MB</td>
+                          <td class="flex"><i class="icon-align-left"></i> Yaddaş limiti</td>
+                          <td>$problem.memoryLimit MB</td>
                       </tr>
                       <tr>
-                          <td><i class="icon-print"></i> Output limit</td>
-                          <td>${problem.get("ol")} KB</td>
+                          <td class="flex"><i class="icon-print"></i> Çıxış limiti</td>
+                          <td>$problem.outputLimit KB</td>
                       </tr>
                     </tbody>
                 </table>
-              <h3>Check your solution</h3>
-              <div>
-                <a href="#submit-modal" class="btn btn-primary modal-trigger">Submit a solution</a>
-              </div>
+
 
               <div class="modal fade" id="submit-modal">
-                    <div class="modal-header">
-                      <a class="close" data-dismiss="modal">&times;</a>
-                      <h3>Submit a solution</h3>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                              <div class="control-group">
-                                <label class="control-label" for="source">Source code:</label>
-                                <div class="controls">
-                                  <textarea class="input-xlarge" id="source" rows="3" style="width: 98%; height: 184px;"></textarea>
-                                </div>
+                  <form method="post" enctype="multipart/form-data" action="/submits/upload">
+                      <div class="modal-header">
+                          <a class="close" data-dismiss="modal">&times;</a>
+
+                          <h3>Submit a solution</h3>
+                      </div>
+
+                      <div class="modal-body">
+                          <p class="alert alert-info">
+                              <strong>Supported languages:</strong> Pascal, Python, Java, C and C++.<br>
+                              <strong>Need help?</strong> <a href="#docs-help-submit">Read more about solution
+                              submission</a>.
+                          </p>
+
+                          <input type="hidden" name="problem-no" id="problem-no" value="$problem.no">
+
+                          <div class="control-group">
+                              <label class="control-label" for="source">Upload Source code:</label>
+                              <div class="controls">
+                                  <input type="file" name="source" id="source">
                               </div>
-                            <hr>
-                            <div class="control-group">
-                                <label class="control-label" for="language">Language</label>
-                                <div class="controls">
-                                  <select id="language">
-                                    <option>C</option>
-                                    <option>C++</option>
-                                    <option>Java</option>
-                                    <option>Pascal</option>
-                                    <option>Python</option>
-                                  </select>
-                                </div>
-                              </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                      <a href="#" class="btn btn-primary">Submit</a>
-                      <a href="#" data-dismiss="modal" class="btn">Cancel</a>
-                    </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+                      </div>
+                  </form>
               </div>
 
           </div>

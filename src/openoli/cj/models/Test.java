@@ -1,75 +1,67 @@
 package openoli.cj.models;
 
-import com.googlecode.objectify.Key;
-import openoli.cj.DAO;
+import com.google.appengine.api.datastore.Text;
+import com.googlecode.objectify.annotation.Serialized;
 
-import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test implements IRecord {
+public class Test {
 
-    @Id
-    private Long id;
+    private Text input;
 
-    private String input;
-    private List<String> outputs;
-    private String script;
+    @Serialized
+    private List<Text> outputs;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Text script;
 
     public String getInput() {
-        return input;
+        return input.getValue();
     }
 
     public void setInput(String input) {
-        this.input = input;
+        this.input = new Text(input);
     }
 
     public List<String> getOutputs() {
-        return outputs;
+        List<String> strList = new ArrayList<String>();
+        for (Text output : outputs) {
+            strList.add(output.getValue());
+        }
+        return strList;
     }
 
     public void setOutputs(List<String> outputs) {
-        this.outputs = outputs;
+        List<Text> result = new ArrayList<Text>();
+        for (String output : outputs) {
+            result.add(new Text(output));
+        }
+
+        this.outputs = result;
     }
 
     public String getScript() {
-        return script;
+        return script.getValue();
     }
 
     public void setScript(String script) {
-        this.script = script;
+        this.script = new Text(script);
     }
 
     public Test() {
-        input = "";
-        script = "";
-        outputs = new ArrayList<String>();
-    }
-
-    @Override
-    public Long save() {
-        DAO.getOfy().put(this);
-        return this.id;
+        input = new Text("");
+        script = new Text("");
+        outputs = new ArrayList<Text>();
     }
 
     public void pushOutput(int index, String output) {
+        Text outTxt = new Text(output);
         if (index >= outputs.size()) {
-            outputs.add(index, output);
+            outputs.add(index, outTxt);
         }
         else {
-            outputs.set(index, output);
+            outputs.set(index, outTxt);
         }
     }
 
-    public Key<Test> getKey() {
-        return new Key<Test>(Test.class, id);
-    }
 }

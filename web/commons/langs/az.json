@@ -1,4 +1,9 @@
 {
     "$Problem" : "Məsələ",
-    "$Problems" : "Məsələlər"
+    "$Problems" : "Məsələlər",
+    "$Rankings" : "Reytinq",
+
+    "$SignIn": "Giriş",
+    "$SignOut": "Çıxış",
+    "$SignUp": "Qeydiyyat"
 }

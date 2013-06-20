@@ -34,8 +34,6 @@ public class SignInController extends HttpServlet implements IController {
         else {
             renderSignInForm(req, res, validationResult);
         }
-        
-        renderSignInForm(req, res, new ArrayList<String>());
     }
 
     private List<String> authenticate(String email, String password, String sesionId) {

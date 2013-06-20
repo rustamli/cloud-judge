@@ -24,13 +24,51 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
    	</servlet-mapping>
 
     <servlet>
-   		<servlet-name>ProblemListController</servlet-name>
-   		<servlet-class>openoli.cj.controllers.problems.ProblemListController</servlet-class>
+   		<servlet-name>ProblemController</servlet-name>
+   		<servlet-class>openoli.cj.controllers.problems.ProblemController</servlet-class>
    	</servlet>
    	<servlet-mapping>
-   		<servlet-name>ProblemListController</servlet-name>
-   		<url-pattern>/problems</url-pattern>
+   		<servlet-name>ProblemController</servlet-name>
+   		<url-pattern>/problems/*</url-pattern>
    	</servlet-mapping>
+
+    <servlet>
+        <servlet-name>ProblemListController</servlet-name>
+        <servlet-class>openoli.cj.controllers.problems.ProblemListController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProblemListController</servlet-name>
+        <url-pattern>/problems</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewSubmitStatus</servlet-name>
+        <servlet-class>openoli.cj.controllers.submit.ViewSubmitStatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewSubmitStatus</servlet-name>
+        <url-pattern>/submits/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+   		<servlet-name>UploadSubmit</servlet-name>
+   		<servlet-class>openoli.cj.controllers.submit.UploadSubmit</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>UploadSubmit</servlet-name>
+   		<url-pattern>/submits/upload</url-pattern>
+   	</servlet-mapping>
+
+    <servlet>
+   		<servlet-name>CheckSubmit</servlet-name>
+   		<servlet-class>openoli.cj.controllers.submit.CheckSubmitTask</servlet-class>
+   	</servlet>
+   	<servlet-mapping>
+   		<servlet-name>CheckSubmit</servlet-name>
+   		<url-pattern>/submits/check-submit</url-pattern>
+   	</servlet-mapping>
+
+
 
     <servlet>
    		<servlet-name>SignOutController</servlet-name>

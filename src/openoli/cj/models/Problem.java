@@ -1,12 +1,14 @@
 package openoli.cj.models;
 
-import com.googlecode.objectify.Key;
+import com.googlecode.objectify.Objectify;
 import net.sf.json.JSONObject;
 import openoli.cj.DAO;
 
+import javax.persistence.Embedded;
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Problem implements IRecord {
 
@@ -18,14 +20,18 @@ public class Problem implements IRecord {
     private Double memoryLimit;
     private Double outputLimit;
 
-    private List<Key<Test>> tests;
-    private List<Key<Translation>> translations;
-    private List<Key<Tag>> tags;
+    @Embedded
+    private List<Test> tests;
+
+    @Embedded
+    private List<Translation> translations;
+
+    private List<String> tags;
 
     private ECheckerType checkerType;
     
     private Float successPercentage;
-    private Long submintsCount;
+    private Long submitsCount;
 
     private Long problemFileId;
 
@@ -72,27 +78,27 @@ public class Problem implements IRecord {
         this.outputLimit = outputLimit;
     }
 
-    public List<Key<Test>> getTests() {
+    public List<Test> getTests() {
         return tests;
     }
 
-    public void setTests(List<Key<Test>> tests) {
+    public void setTests(List<Test> tests) {
         this.tests = tests;
     }
 
-    public List<Key<Translation>> getTranslations() {
+    public List<Translation> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(List<Key<Translation>> translations) {
+    public void setTranslations(List<Translation> translations) {
         this.translations = translations;
     }
 
-    public List<Key<Tag>> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<Key<Tag>> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 
@@ -112,12 +118,12 @@ public class Problem implements IRecord {
         this.successPercentage = successPercentage;
     }
 
-    public Long getSubmintsCount() {
-        return submintsCount;
+    public Long getSubmitsCount() {
+        return submitsCount;
     }
 
-    public void setSubmintsCount(Long submintsCount) {
-        this.submintsCount = submintsCount;
+    public void setSubmitsCount(Long submitsCount) {
+        this.submitsCount = submitsCount;
     }
 
     public Long getProblemFileId() {
@@ -130,7 +136,12 @@ public class Problem implements IRecord {
 
     @Override
     public Long save() {
-        DAO.getOfy().put(this);
+        // remove previous versions of the problem
+        Objectify ofy = DAO.getOfy();
+        List<Problem> oldVersions = ofy.query(Problem.class).filter("no", this.no).list();
+        ofy.delete(oldVersions);
+
+        ofy.put(this);
         return this.id;
     }
 
@@ -143,45 +154,53 @@ public class Problem implements IRecord {
         this.checkerType = ECheckerType.valueOf(json.getString("checker_type"));
     }
 
-    public void setTestsFromList(List<Test> tests) {
-        this.tests = new ArrayList<Key<Test>>();
-        for (Test test : tests) {
-            this.tests.add(test.getKey());
-        }
-    }
+    public void setTestsFromMap(Map<Long, Test> tests) {
+        this.tests = new ArrayList<Test>();
+        int count = tests.size();
+        long i = 1;
 
-    public void setTranslationsFromList(List<Translation> translations) {
-        this.translations = new ArrayList<Key<Translation>>();
-        for (Translation translation : translations) {
-            this.translations.add(translation.getKey());
+        while (i <= count) {
+            this.tests.add(tests.get(i));
+            i += 1;
         }
     }
 
     public static List<Problem> list() {
-        return DAO.getOfy().query(Problem.class).list();
+        return DAO.getOfy().query(Problem.class).order("no").list();
     }
-    
-    public String getTitle(String langCode) {
+
+    public Translation getTranslation(String langCode) {
         Translation requiredTranslation = null;
         Translation englishTranslation = null;
-        for (Key<Translation> translationKey : translations) {
-            Translation translation = Translation.getByKey(translationKey);
-            if (translation.getLang().toString().equals(langCode)) {
-                requiredTranslation = translation;
-                break;
+        if (translations != null)
+            for (Translation translation : translations) {
+                if (translation.getLang().toString().equals(langCode)) {
+                    requiredTranslation = translation;
+                    break;
+                }
+                else if (translation.getLang() == ELangType.ENGLISH) {
+                    englishTranslation = translation;
+                }
             }
-            else if (translation.getLang() == ELangType.ENGLISH) {
-                englishTranslation = translation;
-            }
-        }
 
         if ((requiredTranslation == null) && (englishTranslation != null))
             requiredTranslation = englishTranslation;
-        else {
-            requiredTranslation = new Translation();
-            requiredTranslation.setTitle(String.format("#%d", id));
-        }
 
-        return requiredTranslation.getTitle();
+        return requiredTranslation;
+    }
+    
+    public String getTitle(String langCode) {
+        Translation translation = getTranslation(langCode);
+        if (translation == null)
+            return "{ invalid problem }";
+        return translation.getTitle();
+    }
+
+    public static Problem getByNo(Long no) {
+        return DAO.getOfy().query(Problem.class).filter("no", no).get();
+    }
+
+    public static Problem get(Long problemId) {
+        return DAO.getOfy().get(Problem.class, problemId);
     }
 }

@@ -12,7 +12,9 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.zip.Adler32;
 import java.util.zip.CheckedInputStream;
@@ -46,7 +48,7 @@ public class ImportProblemTask extends HttpServlet {
         ZipInputStream zipStream = getZipInputStreamFromProblemFile(problemFile);
         ZipEntry zipEntry = zipStream.getNextEntry();
         Problem problem = new Problem();
-        List<Test> tests = new ArrayList<Test>();
+        Map<Long, Test> tests = new HashMap<Long, Test>();
         List<Translation> translations = new ArrayList<Translation>();
 
         while (zipEntry != null) {
@@ -73,8 +75,8 @@ public class ImportProblemTask extends HttpServlet {
 
         zipStream.close();
 
-        problem.setTestsFromList(tests);
-        problem.setTranslationsFromList(translations);
+        problem.setTestsFromMap(tests);
+        problem.setTranslations(translations);
         problem.setProblemFileId(problemFile.getId());
 
         problem.save();
@@ -95,12 +97,12 @@ public class ImportProblemTask extends HttpServlet {
         translation.setText(textParts[1]);
 
         translations.add(translation);
-        translation.save();
     }
 
-    private void processTestEntry(ZipInputStream zipStream, List<Test> tests, String name) throws IOException {
+    private void processTestEntry(ZipInputStream zipStream, Map<Long, Test> tests, String name) throws IOException {
         String[] nameParts = name.split("/");
         Test test = getTestByEntryNameParts(tests, nameParts);
+
         String fileName = nameParts[2];
         if (fileName.startsWith("in")) {
             String input = convertZipStreamToString(zipStream);
@@ -114,23 +116,20 @@ public class ImportProblemTask extends HttpServlet {
         }
         else if (fileName.startsWith("script")) {
             String script = convertZipStreamToString(zipStream);
-            test.setInput(script);
+            test.setScript(script);
         }
-
-        test.save();
     }
 
-    private Test getTestByEntryNameParts(List<Test> tests, String[] nameParts) {
-
-        int indexOfTest = Integer.parseInt(nameParts[1]) - 1;
+    private Test getTestByEntryNameParts(Map<Long, Test> tests, String[] nameParts) {
+        long noOfTest = Long.parseLong(nameParts[1]);
 
         Test test;
-        if (indexOfTest >= tests.size()) {
+        if (! tests.containsKey(noOfTest)) {
             test = new Test();
-            tests.add(indexOfTest, test);
+            tests.put(noOfTest, test);
         }
         else {
-            test = tests.get(indexOfTest);
+            test = tests.get(noOfTest);
         }
 
         return test;
@@ -144,6 +143,6 @@ public class ImportProblemTask extends HttpServlet {
     }
 
     private String convertZipStreamToString(ZipInputStream zipStream) throws IOException {
-        return IOUtils.toString(zipStream);
+        return IOUtils.toString(zipStream, "UTF-8");
     }
 }

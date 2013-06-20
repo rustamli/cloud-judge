@@ -1,4 +1,9 @@
 {
     "$Problem" : "Problem",
-    "$Problems" : "Problems"
+    "$Problems" : "Problems",
+    "$Rankings" : "Rankings",
+
+    "$SignIn": "Sign In",
+    "$SignOut": "Sign Out",
+    "$SignUp": "Sign Up"
 }
