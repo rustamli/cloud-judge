@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "_default": {
+            "link": "iolimpaz"
+        }, 
+        "iolimpaz": {
+            "applicationId": "cdM1juEpYpjTkw4easTgBZJDHN6ErwSF30CRYu2y", 
+            "masterKey": "2vKruF1gO63ShGNFZeZAZUFkb4oVklIZzUrlYuYl"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.18"
+    }
+}
