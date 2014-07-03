@@ -19,3 +19,19 @@
 .navbar-logo img {
     margin: 9px 10px 0 10px;
 }
+
+.btn-info {
+    outline: none !important;
+}
+
+.btn-info {
+    color: #FFF;
+    background-color: #06D;
+    border-color: #0065d9;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+    color: #FFF;
+    background-color: #006ff8;
+    border-color: #006eef;
+}

@@ -1,52 +1,19 @@
 
-import os
-
-import jinja2
 import webapp2
-from webapp2_extras import sessions
+import logging
+from ctrl_accounts import *
+from ctrl_base import *
 
-
-JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
-    extensions=["jinja2.ext.autoescape"],
-    autoescape=True)
-
-
-class MainPage(webapp2.RequestHandler):
-    def dispatch(self):
-        self.session_store = sessions.get_store(request=self.request)
-
-        try:
-            webapp2.RequestHandler.dispatch(self)
-        finally:
-            self.session_store.save_sessions(self.response)
-
-    @webapp2.cached_property
-    def session(self):
-        return self.session_store.get_session()
-
-    def get(self):
-        self.response.headers["Content-Type"] = "text/html"
-
-        switch_to_lang = self.request.get("lang")
-        if switch_to_lang:
-            self.session["lang"] = switch_to_lang
-            self.redirect(self.request.path)
-
-        lang = self.session.get("lang") or "az"
-
-        template_values = {
-            'lang': lang
-        }
-
-        template = JINJA_ENVIRONMENT.get_template("lang/" + lang + "/tpl/index.html")
-        self.response.write(template.render(template_values))
-
-
-config = {'webapp2_extras.sessions': {
-    'secret_key': 'berlin8996',
+config = {"webapp2_extras.sessions": {
+    "secret_key": "berlin8996", # another key used in production
 }}
 
+logging.getLogger().setLevel(logging.DEBUG)
+
 application = webapp2.WSGIApplication([
-    ('/', MainPage),
+    ("/", MainPage),
+    ("/sign-in", SignInPage),
+    ("/sign-up", SignUpPage),
+    ("/sign-out", SignOutHandler),
+    (r"/accounts/([a-zA-Z0-9-_]+)", AccountPage),
 ], config=config, debug=True)

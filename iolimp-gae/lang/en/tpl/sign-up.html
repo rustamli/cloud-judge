@@ -1,0 +1,88 @@
+<html>
+<head>
+    <title>i-olimp.az | Sign up</title>
+    <link rel="shortcut icon" href="/img/favicon.ico" />
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/sign-in-form.css"/>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+        var errors = {
+            'PWD_DONT_MATCH': "Passwords don't match",
+            'BAD_EMAIL_FORMAT': "Invalid email format",
+            'PWD_TOO_SHORT': "Specified password is too short",
+            'USER_EXISTS': "User with this email already exists. If you don't remember your password please contact us"
+        };
+
+        $(function () {
+            var $btn = $('.login');
+
+            $btn.click(function () {
+                var originalBtnTitle = $btn.html();
+                $btn.html('Please wait ...');
+                $btn.attr('disabled', 'disabled');
+                $.ajax({
+                    url: '/sign-up',
+                    type: 'POST',
+                    data: {
+                        email: $('#email').val(),
+                        password: $('#password').val(),
+                        password2: $('#password2').val()
+                    },
+                    success: function (response) {
+                        $btn.html(originalBtnTitle);
+                        $btn.removeAttr('disabled');
+
+                        location.href = response;
+                    },
+                    error: function (response) {
+                        alert(errors[response.responseText]);
+                        $btn.html(originalBtnTitle);
+                        $btn.removeAttr('disabled');
+                    }
+                })
+            });
+
+            var enterPressHandler = function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    $btn.click();
+                }
+            };
+
+            $('#email').keypress(enterPressHandler);
+            $('#password').keypress(enterPressHandler);
+            $('#password2').keypress(enterPressHandler);
+        });
+    </script>
+</head>
+<body>
+{% include "lang/" + lang + "/tpl/header.html" %}
+
+<div class="container">
+    <div class="login-container">
+        <h1>Sign up</h1>
+        <div id="output"></div>
+        <div class="avatar avatar-sign-up"></div>
+        <div class="form-box">
+            <form action="" method="">
+                <input id="email" name="user" type="text" placeholder="email">
+                <input id="password" type="password" placeholder="enter password" style="border-radius: 0">
+                <input id="password2" type="password" placeholder="re-enter password">
+                <button class="btn btn-info btn-block login" type="button">Sign up</button>
+            </form>
+
+            <a class="form-subtext" href="/sign-in">Already have an account? <br>Click to sign in as existing user</a>
+        </div>
+    </div>
+</div>
+
+<footer class="container">&copy; 2014 i-olimp.az team</footer>
+
+</body>
+</html>
